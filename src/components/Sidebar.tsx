@@ -13,12 +13,12 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col h-full p-6">
+    <div className="flex flex-col h-full p-4 md:p-6">
       <div className="flex items-center gap-3 mb-8">
-        <div className="h-10 w-10 bg-brand-green/20 rounded-full"></div>
-        <div>
-          <p className="font-semibold text-brand-text">Notification Dashboard</p>
-          <p className="text-sm text-gray-500">Real-time System</p>
+        <div className="h-10 w-10 bg-brand-green/20 rounded-full flex-shrink-0"></div>
+        <div className="min-w-0">
+          <p className="font-semibold text-brand-text text-sm md:text-base truncate">Notification Dashboard</p>
+          <p className="text-xs md:text-sm text-gray-500 truncate">Real-time System</p>
         </div>
       </div>
 

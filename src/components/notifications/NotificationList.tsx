@@ -8,12 +8,14 @@ interface NotificationListProps {
   notifications: Notification[];
   onMarkAsRead: (id: string) => void;
   onDelete: (id: string) => void;
+  onOpenModal: (notification: Notification) => void;
 }
 
 export default function NotificationList({
   notifications,
   onMarkAsRead,
   onDelete,
+  onOpenModal,
 }: NotificationListProps) {
   const sortedNotifications = [...notifications].sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -32,13 +34,19 @@ export default function NotificationList({
   return (
     <Card className="p-0 overflow-hidden">
       <div className="divide-y divide-gray-100">
-        {sortedNotifications.map((notification) => (
-          <NotificationItem
+        {sortedNotifications.map((notification, index) => (
+          <div
             key={notification.id}
-            notification={notification}
-            onMarkAsRead={onMarkAsRead}
-            onDelete={onDelete}
-          />
+            className="animate-in fade-in slide-in-from-top-2"
+            style={{ animationDelay: `${index * 50}ms` }}
+          >
+            <NotificationItem
+              notification={notification}
+              onMarkAsRead={onMarkAsRead}
+              onDelete={onDelete}
+              onOpenModal={onOpenModal}
+            />
+          </div>
         ))}
       </div>
     </Card>

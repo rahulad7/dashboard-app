@@ -24,7 +24,7 @@ export default function ReadVsUnreadChart({ data }: ReadVsUnreadChartProps) {
           cy="50%"
           labelLine={false}
           label={({ name, percent }) => `${name}: ${((percent || 0) * 100).toFixed(0)}%`}
-          outerRadius={100}
+          outerRadius={80}
           fill="#8884d8"
           dataKey="value"
         >
@@ -36,10 +36,11 @@ export default function ReadVsUnreadChart({ data }: ReadVsUnreadChartProps) {
           contentStyle={{ 
             backgroundColor: '#fff', 
             border: '1px solid #e5e7eb',
-            borderRadius: '8px'
+            borderRadius: '8px',
+            fontSize: '12px'
           }}
         />
-        <Legend />
+        <Legend wrapperStyle={{ fontSize: '12px' }} />
       </PieChart>
     </ResponsiveContainer>
   );

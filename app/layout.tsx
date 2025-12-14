@@ -24,8 +24,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {/* Topbar */}
             <Topbar />
 
-            {/* Page content */}
-            <div className="p-6">{children}</div>
+          {/* Page content */}
+          <div className="p-4 md:p-6">{children}</div>
           </main>
         </NotificationsProvider>
       </body>

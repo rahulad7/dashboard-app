@@ -7,6 +7,7 @@ interface NotificationItemProps {
   notification: Notification;
   onMarkAsRead: (id: string) => void;
   onDelete: (id: string) => void;
+  onOpenModal: (notification: Notification) => void;
 }
 
 const typeColors = {
@@ -35,8 +36,10 @@ export default function NotificationItem({
   notification,
   onMarkAsRead,
   onDelete,
+  onOpenModal,
 }: NotificationItemProps) {
   const handleClick = () => {
+    onOpenModal(notification);
     if (!notification.read) {
       onMarkAsRead(notification.id);
     }
@@ -50,34 +53,34 @@ export default function NotificationItem({
   return (
     <div
       onClick={handleClick}
-      className={`p-4 border-b border-gray-100 cursor-pointer hover:bg-gray-50 transition ${
+      className={`p-3 md:p-4 border-b border-gray-100 cursor-pointer hover:bg-gray-50 transition-all duration-200 ease-in-out animate-in fade-in slide-in-from-top-2 ${
         !notification.read ? 'bg-blue-50/30' : ''
       }`}
     >
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex items-start justify-between gap-2 md:gap-3">
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-2 mb-1 flex-wrap">
             <span
               className={`px-2 py-0.5 rounded text-xs font-medium ${typeColors[notification.type]}`}
             >
               {notification.type}
             </span>
             {!notification.read && (
-              <span className="h-2 w-2 bg-blue-500 rounded-full"></span>
+              <span className="h-2 w-2 bg-blue-500 rounded-full flex-shrink-0"></span>
             )}
           </div>
-          <h3 className={`font-semibold text-sm mb-1 ${!notification.read ? 'text-brand-text' : 'text-gray-600'}`}>
+          <h3 className={`font-semibold text-sm mb-1 truncate ${!notification.read ? 'text-brand-text' : 'text-gray-600'}`}>
             {notification.title}
           </h3>
-          <p className="text-sm text-gray-600 mb-2">{notification.message}</p>
+          <p className="text-xs md:text-sm text-gray-600 mb-2 line-clamp-2">{notification.message}</p>
           <span className="text-xs text-gray-400">{formatTime(notification.createdAt)}</span>
         </div>
         <button
           onClick={handleDelete}
-          className="p-1 hover:bg-gray-200 rounded transition flex-shrink-0"
+          className="p-1 hover:bg-gray-200 rounded transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-red-300 flex-shrink-0"
           aria-label="Delete notification"
         >
-          <XMarkIcon className="h-4 w-4 text-gray-400" />
+          <XMarkIcon className="h-4 w-4 text-gray-400 hover:text-red-500 transition-colors" />
         </button>
       </div>
     </div>
